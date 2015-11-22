@@ -3,7 +3,10 @@ function Game(context, width, height, cb) {
   this.turnCount = 0;
   this.camera = new Camera();
   this.renderer = new Renderer(context, width, height);
-  this.grid = new Grid(40, 40, 32);
+  this.mapBuilder = new MapBuilder(40, 40, 32);
+  
+  this.world = new World(this.mapBuilder.getMapTemplate());
+
   this.onTurnFinished = cb;
 
   // testing image data vs. fill rect
@@ -32,12 +35,12 @@ Game.prototype.step = function() {
 };
 
 Game.prototype.redraw = function(){
-  this.renderer.submitToDraw(this.grid.getDrawables());
+  this.renderer.submitToDraw(this.world.getDrawables());
   this.renderer.draw(this.camera.getX(), this.camera.getY());
 };
 
 Game.prototype.handleClick = function(x, y) {
-  var tile = this.grid.selectTile(x, y);
+  var tile = this.world.selectTile(x, y, this.camera);
   if(tile !== null) {
     console.log("you selected tile: " + tile.getI() + ", " + tile.getJ());
     tile.activate();
