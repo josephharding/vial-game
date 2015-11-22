@@ -3,7 +3,7 @@ function Game(context, width, height, cb) {
   this.turnCount = 0;
   this.camera = new Camera();
   this.renderer = new Renderer(context, width, height);
-  this.grid = new Grid(100, 100, 32);
+  this.grid = new Grid(40, 40, 32);
   this.onTurnFinished = cb;
 
   // testing image data vs. fill rect

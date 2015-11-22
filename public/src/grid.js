@@ -5,11 +5,12 @@ function Grid(width, height, dim) {
   this.maxJ = height;
 
   this.tiles = [];
-  var types = ["forest", "grass", "rock"];
+  var types = ["forest", "grass", "grass", "rock"];
 
   for(var i = 0; i < this.maxI; i++) {
     for(var j = 0; j < this.maxJ; j++) {
-      this.tiles.push(new Tile(i, j, this.tileDim, types[Math.floor(Math.random()*types.length)]));
+      var typeIndex = Math.floor(Math.random() * types.length);
+      this.tiles.push(new Tile(i, j, this.tileDim, types[typeIndex]));
     }
   }
 }

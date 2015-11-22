@@ -29,17 +29,23 @@ Drawable.prototype.colorPixel = function(data, index) {
 };
 
 // data is the writeable component of imageData, an array with an entry for each pixel in the canvas
-Drawable.prototype.draw = function(data, canvasWidth) {
+Drawable.prototype.draw = function(data, canvasWidth, canvasHeight, offsetX, offsetY) {
   // there are four elements that make a single pixel, the red value, the green, the blue, and alpha
   var pixelElements = 4;
-  var startingIndex = (this.y * canvasWidth * pixelElements) + (this.x * pixelElements);
+ 
+  var startingJ = this.y + offsetY;
+  var startingI = this.x + offsetX;
   // loop through the rectangle that starts at startingIndex and has width and height
   var row = 0;
   for(var j = 0; j < this.height; j++) {  
     for(var i = 0; i < this.width; i++) {
-      var pixelIndex = startingIndex + (i * pixelElements) + row;
-      this.colorPixel(data, pixelIndex);
+      
+      var pixelJ = startingJ + j;
+      var pixelI = startingI + i;
+  
+      if(pixelI > 0 && pixelI < canvasWidth && pixelJ > 0 && pixelJ < canvasHeight) {   
+        this.colorPixel(data, pixelElements * ((pixelJ * canvasWidth) + pixelI));
+      }
     }
-    row += (canvasWidth * pixelElements);
   }
 };

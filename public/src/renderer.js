@@ -4,6 +4,8 @@ function Renderer(context, width, height) {
   this.height = height;
   this.drawList = [];
   this.context = context;
+
+  this.imageData = this.context.createImageData(this.width, this.height);
 }
 
 Renderer.prototype.submitToDraw = function(list) {
@@ -12,12 +14,8 @@ Renderer.prototype.submitToDraw = function(list) {
 
 Renderer.prototype.draw = function(xOffset, yOffset) {
   this.context.clearRect(0, 0, this.width, this.height);
-  
-  var imgData = this.context.createImageData(this.width, this.height);
-  console.log("image data data has length: " + imgData.data.length);
-
   for(var i = 0; i < this.drawList.length; i++) {
-    this.drawList[i].draw(imgData.data, this.width);
+    this.drawList[i].draw(this.imageData.data, this.width, this.height, xOffset, yOffset);
   }
-  this.context.putImageData(imgData, xOffset, yOffset);
+  this.context.putImageData(this.imageData, 0, 0);
 };
