@@ -1,9 +1,9 @@
 
 function Grid(width, height, dim) {
+  this.tileDim = dim;
   this.maxI = width;
   this.maxJ = height;
 
-  this.tileDim = 32;
   this.tiles = [];
   var types = ["forest", "grass", "rock"];
 

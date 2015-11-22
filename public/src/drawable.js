@@ -1,6 +1,5 @@
 
 function Drawable(x, y, width, height, color) {
-
   this.width = width;
   this.height = height;
   this.color = color;
@@ -31,9 +30,9 @@ Drawable.prototype.colorPixel = function(data, index) {
 
 // data is the writeable component of imageData, an array with an entry for each pixel in the canvas
 Drawable.prototype.draw = function(data, canvasWidth) {
-  var startingIndex = (this.y * canvasWidth) + this.x;
   // there are four elements that make a single pixel, the red value, the green, the blue, and alpha
   var pixelElements = 4;
+  var startingIndex = (this.y * canvasWidth * pixelElements) + (this.x * pixelElements);
   // loop through the rectangle that starts at startingIndex and has width and height
   var row = 0;
   for(var j = 0; j < this.height; j++) {  
@@ -41,7 +40,6 @@ Drawable.prototype.draw = function(data, canvasWidth) {
       var pixelIndex = startingIndex + (i * pixelElements) + row;
       this.colorPixel(data, pixelIndex);
     }
-    // 4 is the number of elements per pixel
     row += (canvasWidth * pixelElements);
   }
 };

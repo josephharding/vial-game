@@ -3,9 +3,26 @@ function Game(context, width, height, cb) {
   this.turnCount = 0;
   this.camera = new Camera();
   this.renderer = new Renderer(context, width, height);
-  this.grid = new Grid(40, 40, 16);
+  this.grid = new Grid(100, 100, 32);
   this.onTurnFinished = cb;
-  this.step();
+
+  // testing image data vs. fill rect
+  /*
+  var width = 16;
+  var height = 16;
+  context.fillRect(0, 0, width, height);
+  var image = context.createImageData(width, height);
+  var data = image.data; 
+  for(var i = 0; i < width * height * 4; i += 4) {
+    data[i + 0] = 0;
+    data[i + 1] = 0;
+    data[i + 2] = 0;
+    data[i + 3] = 255;
+  }
+  context.putImageData(image, 0, 0);
+  */
+  
+  this.redraw();
 }
 
 Game.prototype.step = function() {
