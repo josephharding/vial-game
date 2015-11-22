@@ -18,7 +18,8 @@ Drawable.prototype.highlight = function() {
   this.color = "white";
 };
 
-Drawable.prototype.draw = function(context) {
+Drawable.prototype.draw = function(context, xOffset, yOffset) {
   context.fillStyle = this.color;
-  context.fillRect(this.x, this.y, this.width, this.height);  
+  console.log("offset x, y: " + xOffset + ", " + yOffset);
+  context.fillRect(this.x + xOffset, this.y + yOffset, this.width, this.height);  
 };

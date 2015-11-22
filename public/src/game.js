@@ -1,21 +1,18 @@
 
 function Game(context, cb) {
   this.turnCount = 0;
+  this.camera = new Camera();
   this.renderer = new Renderer(context);
   this.grid = new Grid(10, 10, 16);
-  //this.tileManager = new TileManager();
-  this.renderer.submitToDraw(this.grid.getDrawables());
-  this.renderer.draw();
-
   this.onTurnFinished = cb;
+  this.step();
 }
 
 Game.prototype.step = function() {
   this.turnCount++;
   this.renderer.submitToDraw(this.grid.getDrawables());
-  this.renderer.draw();
-
-  this.onTurnFinished();
+  this.renderer.draw(this.camera.getX(), this.camera.getY());
+  this.onTurnFinished(this.turnCount);
 }
 
 Game.prototype.handleClick = function(x, y) {
@@ -31,6 +28,19 @@ Game.prototype.handleKeyUp = function(keyCode) {
   console.log(keyCode);
   if(keyCode == 13) {
     this.step();
+    // up
+  } else if (keyCode == 38) {
+    this.camera.moveUp();
+    // down
+  } else if (keyCode == 40) {
+    this.camera.moveDown();
+    // right
+  } else if (keyCode == 39) {
+    
+    this.camera.moveRight();
+    // left
+  } else if (keyCode == 37) {
+    this.camera.moveLeft();
   }
 };
 

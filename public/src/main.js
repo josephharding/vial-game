@@ -6,8 +6,8 @@ window.onload = function() {
   
   var context = canvas.getContext("2d");
   
-  var game = new Game(context, function() {
-    turnCounter.textContent = game.getTurns(); 
+  var game = new Game(context, function(turns) {
+    turnCounter.textContent = turns; 
   });
 
   document.onkeyup = function(event) {
