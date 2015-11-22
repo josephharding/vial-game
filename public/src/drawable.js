@@ -1,5 +1,6 @@
 
 function Drawable(x, y, width, height, color) {
+
   this.width = width;
   this.height = height;
   this.color = color;
@@ -11,6 +12,10 @@ function Drawable(x, y, width, height, color) {
 Drawable.prototype.setPos = function(x, y) {
   this.x = x;
   this.y = y;
+};
+
+Drawable.prototype.highlight = function() {
+  this.color = "white";
 };
 
 Drawable.prototype.draw = function(context) {
