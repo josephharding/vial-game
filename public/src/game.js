@@ -11,7 +11,7 @@ Game.prototype.step = function() {
   this.turnCount++;
   this.renderer.submitToDraw(this.grid.getDrawables());
   this.renderer.draw();
-}
+};
 
 Game.prototype.handleKeyUp = function(event) {
   // handle key press
@@ -19,5 +19,5 @@ Game.prototype.handleKeyUp = function(event) {
   if(event.keyCode == 13) {
     this.step();
   }
-}
+};
 
