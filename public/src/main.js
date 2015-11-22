@@ -6,16 +6,16 @@ window.onload = function() {
   
   var context = canvas.getContext("2d");
   
-  var game = new Game(context, function(turns) {
+  var game = new Game(context, canvas.width, canvas.height, function(turns) {
     turnCounter.textContent = turns; 
   });
 
-  document.onkeyup = function(event) {
-    game.handleKeyUp(event.keyCode);
-  }
+  document.onkeydown = function(event) {
+    game.handleKeyDown(event.keyCode);
+  };
 
   canvas.onclick = function(event) {
     game.handleClick(event.offsetX, event.offsetY);
-  }
+  };
 
 };

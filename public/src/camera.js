@@ -6,19 +6,19 @@ function Camera() {
 }
 
 Camera.prototype.moveUp = function() {
-  this.y -= this.moveMag;
-};
-
-Camera.prototype.moveDown = function() {
   this.y += this.moveMag;
 };
 
+Camera.prototype.moveDown = function() {
+  this.y -= this.moveMag;
+};
+
 Camera.prototype.moveRight = function() {
-  this.x += this.moveMag;
+  this.x -= this.moveMag;
 };
 
 Camera.prototype.moveLeft = function() {
-  this.x -= this.moveMag;
+  this.x += this.moveMag;
 };
 
 Camera.prototype.getX = function() {
