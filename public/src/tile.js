@@ -3,13 +3,13 @@ function Tile(i, j, tileDim, type) {
   this.i = i;
   this.j = j;
 
-  var tileColor = "black";
+  var tileColor = {'r': 0, 'g': 0, 'b': 0, 'a': 255};
   if(type == "forest") {
-    tileColor = "DarkGreen";
+    tileColor = {'r': 0, 'g': 100, 'b': 0, 'a': 255};
   } else if (type == "grass") {
-    tileColor = "Green";
+    tileColor = {'r': 154, 'g': 205, 'b': 50, 'a': 255};
   } else if (type == "rock") {
-    tileColor = "Gray";
+    tileColor = {'r': 144, 'g': 144, 'b': 144, 'a': 255};
   }
   this.drawable = new Drawable (i*tileDim, j*tileDim, tileDim, tileDim, tileColor);
 }
