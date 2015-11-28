@@ -1,13 +1,19 @@
 
-function Game(context, width, height, cb) {
+function Game(context, viewWidth, viewHeight, cb) {
   this.turnCount = 0;
-  this.camera = new Camera();
-  this.renderer = new Renderer(context, width, height);
   this.mapBuilder = new MapBuilder(40, 40, 32);
+  var mapTemplate = this.mapBuilder.getMapTemplate();
+  this.world = new World(mapTemplate);
+  this.camera = new Camera(viewWidth, viewHeight, mapTemplate.getMapWidthInPixels(), mapTemplate.getMapHeightInPixels());
+  this.renderer = new Renderer(context, viewWidth, viewHeight);
   
-  this.world = new World(this.mapBuilder.getMapTemplate());
 
   this.onTurnFinished = cb;
+
+
+  // var width = 16;
+  // var height = 16;
+  // context.fillRect(100, 100, width, height);
 
   // testing image data vs. fill rect
   /*
@@ -40,16 +46,12 @@ Game.prototype.redraw = function(){
 };
 
 Game.prototype.handleClick = function(x, y) {
-  var tile = this.world.selectTile(x, y, this.camera);
-  if(tile !== null) {
-    console.log("you selected tile: " + tile.getI() + ", " + tile.getJ());
-    tile.activate();
-  }
+  this.world.handleClick(x,y,this.camera);
+  this.redraw();
 };
 
 Game.prototype.handleKeyDown = function(keyCode) {
   // handle key press
-  console.log(keyCode);
   if(keyCode == 13) {
     this.step();
     // up
@@ -77,5 +79,5 @@ Game.prototype.handleKeyDown = function(keyCode) {
 
 Game.prototype.getTurns = function() {
   return this.turnCount;
-}
+};
 

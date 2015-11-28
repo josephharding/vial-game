@@ -33,8 +33,8 @@ Drawable.prototype.draw = function(data, canvasWidth, canvasHeight, offsetX, off
   // there are four elements that make a single pixel, the red value, the green, the blue, and alpha
   var pixelElements = 4;
  
-  var startingJ = this.y + offsetY;
-  var startingI = this.x + offsetX;
+  var startingJ = this.y - offsetY;
+  var startingI = this.x - offsetX;
   // loop through the rectangle that starts at startingIndex and has width and height
   var row = 0;
   for(var j = 0; j < this.height; j++) {  

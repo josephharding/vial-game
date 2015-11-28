@@ -9,12 +9,20 @@ MapTemplate.prototype.getDim = function() {
   return this.tileDim;
 };
 
-MapTemplate.prototype.getTileHeight = function() {
+MapTemplate.prototype.getMapHeightInTiles = function() {
   return this.mapHeightTiles;
 };
 
-MapTemplate.prototype.getTileWidth = function() {
+MapTemplate.prototype.getMapWidthInTiles = function() {
   return this.mapWidthTiles;
+};
+
+MapTemplate.prototype.getMapHeightInPixels = function() {
+  return this.tileDim * this.mapHeightTiles;
+};
+
+MapTemplate.prototype.getMapWidthInPixels = function() {
+  return this.tileDim * this.mapWidthTiles;
 };
 
 MapTemplate.prototype.getTiles = function() {

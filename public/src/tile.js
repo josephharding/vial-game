@@ -2,6 +2,7 @@ function Tile(i, j, tileDim, type) {
 
   this.i = i;
   this.j = j;
+  this.tileDim = tileDim;
 
   var tileColor = {'r': 0, 'g': 0, 'b': 0, 'a': 255};
   if(type == "forest") {
@@ -28,4 +29,8 @@ Tile.prototype.getI = function() {
 
 Tile.prototype.getJ = function() {
   return this.j;
+};
+
+Tile.prototype.getTileDim = function() {
+  return this.tileDim;
 };

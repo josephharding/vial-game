@@ -1,24 +1,36 @@
 
-function Camera() {
+function Camera(viewWidth, viewHeight, mapWidthPixels, mapHeightPixels) {
   this.moveMag = 4;
+  this.mapWidthPixels = mapWidthPixels;
+  this.mapHeightPixels = mapHeightPixels;
+  this.viewWidth = viewWidth;
+  this.viewHeight = viewHeight;
   this.x = 0;
   this.y = 0;
 }
 
 Camera.prototype.moveUp = function() {
-  this.y += this.moveMag;
+  if (this.y > 0) {
+    this.y -= this.moveMag;
+  }
 };
 
 Camera.prototype.moveDown = function() {
-  this.y -= this.moveMag;
+  if (this.y < this.mapHeightPixels - this.viewHeight) {
+    this.y += this.moveMag;
+  }
 };
 
 Camera.prototype.moveRight = function() {
-  this.x -= this.moveMag;
+  if (this.x < this.mapWidthPixels - this.viewWidth){
+    this.x += this.moveMag;
+  }
 };
 
 Camera.prototype.moveLeft = function() {
-  this.x += this.moveMag;
+  if(this.x > 0){
+    this.x -= this.moveMag;
+  }
 };
 
 Camera.prototype.getX = function() {
