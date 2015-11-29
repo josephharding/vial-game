@@ -23,6 +23,14 @@ Tile.prototype.activate = function() {
   this.drawable.highlight();
 };
 
+Tile.prototype.getX = function() {
+  return this.i*this.tileDim;
+};
+
+Tile.prototype.getY = function() {
+  return this.j*this.tileDim;
+};
+
 Tile.prototype.getI = function() {
   return this.i;
 };

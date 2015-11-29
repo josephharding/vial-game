@@ -1,7 +1,7 @@
 
 function World(mapTemplate) {
   this.mapTemplate = mapTemplate;
-  this.player = new Player(0, 0);
+  this.player = new Player(this.mapTemplate.getDim());
 
 }
 
@@ -27,9 +27,19 @@ World.prototype.getDrawables = function() {
 
 World.prototype.handleClick = function(x, y, camera) {
   var tile = this.selectTile(x, y, camera);
-  //this.player.getI and getJ not yet implemented
-  if(Math.abs(this.player.getI() - tile.getI()) < 5 && Math.abs(this.player.getJ() - tile.getJ()) < 5){
-    this.player.setPosition(tile.getI()*tile.getTileDim(), tile.getJ()*tile.getTileDim());
-  }
 
+  //this.player.getI and getJ not yet implemented
+  if(this.player.canMove(tile)){
+    this.player.setPosition(tile);
+  } else {
+    console.log("Target is too far away");
+  }
+};
+
+World.prototype.getPlayerEnergy = function(){
+  return this.player.getEnergy();
+};
+
+World.prototype.turnOver = function(){
+  this.player.energyReset();
 };

@@ -6,9 +6,10 @@ function Game(context, viewWidth, viewHeight, cb) {
   this.world = new World(mapTemplate);
   this.camera = new Camera(viewWidth, viewHeight, mapTemplate.getMapWidthInPixels(), mapTemplate.getMapHeightInPixels());
   this.renderer = new Renderer(context, viewWidth, viewHeight);
+  this.energy = this.world.getPlayerEnergy();
   
 
-  this.onTurnFinished = cb;
+  this.refreshInterface = cb;
 
 
   // var width = 16;
@@ -31,13 +32,18 @@ function Game(context, viewWidth, viewHeight, cb) {
   context.putImageData(image, 0, 0);
   */
   
-  this.redraw();
+  this.refresh();
 }
+
+Game.prototype.refresh = function(){
+  this.redraw();
+  this.refreshInterface(this.turnCount, this.world.getPlayerEnergy());
+};
 
 Game.prototype.step = function() {
   this.turnCount++;
-  this.redraw();
-  this.onTurnFinished(this.turnCount);
+  this.world.turnOver();
+  this.refresh();
 };
 
 Game.prototype.redraw = function(){
@@ -47,7 +53,7 @@ Game.prototype.redraw = function(){
 
 Game.prototype.handleClick = function(x, y) {
   this.world.handleClick(x,y,this.camera);
-  this.redraw();
+  this.refresh();
 };
 
 Game.prototype.handleKeyDown = function(keyCode) {
