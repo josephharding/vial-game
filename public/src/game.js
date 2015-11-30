@@ -1,12 +1,11 @@
 
+
 function Game(context, viewWidth, viewHeight, cb) {
+  this.viewWidth = viewWidth;
+  this.viewHeight = viewHeight;
   this.turnCount = 0;
   this.mapBuilder = new MapBuilder(40, 40, 32);
-  var mapTemplate = this.mapBuilder.getMapTemplate();
-  this.world = new World(mapTemplate);
-  this.camera = new Camera(viewWidth, viewHeight, mapTemplate.getMapWidthInPixels(), mapTemplate.getMapHeightInPixels());
   this.renderer = new Renderer(context, viewWidth, viewHeight);
-  this.energy = this.world.getPlayerEnergy();
   
 
   this.refreshInterface = cb;
@@ -32,8 +31,30 @@ function Game(context, viewWidth, viewHeight, cb) {
   context.putImageData(image, 0, 0);
   */
   
-  this.refresh();
+  // var img = new Image();
+  // img.src = "vial.png";
+
+  // img.onload = function(){
+  //   context.drawImage(img, 30, 30);
+  // };
+
+  // step 1: load img into buffer
+  
+  
+
+  // step 2: convert buffer into bitmap
+  // step 3: convert bitmap into imgdata
+
 }
+
+Game.prototype.start = function(imagedata) {
+  var mapTemplate = this.mapBuilder.getMapTemplate();
+  this.world = new World(mapTemplate, imagedata);
+  this.camera = new Camera(this.viewWidth, this.viewHeight, mapTemplate.getMapWidthInPixels(), mapTemplate.getMapHeightInPixels());
+  this.refresh();
+
+
+};
 
 Game.prototype.refresh = function(){
   this.redraw();

@@ -1,7 +1,7 @@
 
-function World(mapTemplate) {
+function World(mapTemplate, imgdata) {
   this.mapTemplate = mapTemplate;
-  this.player = new Player(this.mapTemplate.getDim());
+  this.player = new Player(this.mapTemplate.getDim(), imgdata);
 
 }
 

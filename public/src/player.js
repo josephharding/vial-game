@@ -1,13 +1,11 @@
 
-function Player(tileDim) {
+function Player(tileDim, imgdata) {
   this.energy = 5;
   this.tileDim = tileDim;
   this.iPos = 0;
   this.jPos = 0;
-  this.playerWidth = 16;
-  this.playerHeight = 16;
   this.color = {'r': 0, 'g': 0, 'b': 0, 'a': 255};
-  this.playerDrawable = new Drawable(this.getX(), this.getY(), this.playerWidth, this.playerHeight, this.color);
+  this.playerDrawable = new imgDrawable(this.getX(), this.getY(), imgdata);
 }
 
 Player.prototype.getDrawablePlayer = function(){
